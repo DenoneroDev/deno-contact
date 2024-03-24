@@ -1,0 +1,10 @@
+#invalid-popup {
+    position: absolute;
+    background-color: #ff0033;
+    color: #ffffff;
+    border-radius: 3px;
+    padding: 3px 15px;
+    font-size: 12px;
+    z-index: 1;
+    border: 1.5px solid #ffffff;
+}

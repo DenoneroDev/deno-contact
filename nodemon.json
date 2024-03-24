@@ -1,0 +1,6 @@
+{
+    "ext": "css html js json",
+    "exec": "pm2 flush && npm run bundle:dev && pm2 kill && pm2 start ./src/backend/server.js && pm2 log",
+    "ignore": "./src/frontend/bundles"
+}
+  

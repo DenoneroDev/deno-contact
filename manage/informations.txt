@@ -1,0 +1,33 @@
+purpose: To contact me via form
+audience: developers, companies & clients
+features:
+ - User-Friendly Interface
+ - Form Fields:
+ 	- Name
+ 	- E-Mail
+	- Company-Name
+	- Subject
+ 	- Text
+ - Validation and Error Handling
+	- Client-side
+	- Server-side validation
+	- User-friendly error messages
+ - Submission Handling:
+	- Email verification
+	- Upon successful submission, users receive a confirmation message
+	- Automatic email notification to me
+technologies:
+ - backend:
+	- node.js
+	- express.js
+	- crypto (generates verification code)
+	- node-corn
+	- nodemailer
+	- webpack
+	- docker
+	- pm2
+ - frontend:
+	- HTML
+	- CSS
+	- JS
+	- jquery

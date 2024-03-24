@@ -1,0 +1,15 @@
+:root {
+    --background: #0E0E11;
+    --text: #F6F6F6;
+    --container: #1A1A1A;
+    --font-style: sans-serif;
+    --stroke: #3D3D3D;
+    --input: #262626;
+    --h1-size: 25px;
+    --label-size: 20px;
+    --h2-size: 18px;
+    --p-size: 16px;
+}
+* {
+    box-sizing: border-box;
+}

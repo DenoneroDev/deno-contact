@@ -1,0 +1,132 @@
+html, body {
+    height: 100%;
+}
+body {
+    background-color: var(--background);
+    color: var(--text);
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-style);
+}
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--stroke);
+    border-radius: 5px;
+}
+main {
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+.wrapper {
+    max-width: 1300px;
+    width: calc(100% - 100px);
+    padding: 20px;
+}
+#container {
+    height: 800px;
+    background-color: var(--container);
+    border-radius: 10px;
+    padding: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+}
+#message-container {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: var(--p-size);
+}
+h1 {
+    font-size: var(--h1-size);
+}
+h2 {
+    font-size: var(--h2-size);
+}
+#separator {
+    width: 2px;
+    height: 50%;
+    background-color: var(--stroke);
+    border-radius: 10px;
+}
+form {
+    display: grid;
+    width: 450px;
+    gap: 30px;
+}
+.input-section {
+    display: grid;
+    gap: 10px;
+}
+#name-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+label {
+    font-size: var(--label-size);
+}
+form input, textarea {
+    background-color: var(--input);
+    border: 2px solid var(--stroke);
+    border-radius: 5px;
+    min-height: 35px;
+    outline: none;
+    color: var(--text);
+    text-indent: 2px;
+    font-size: var(--p-size);
+}
+#name-section input {
+    width: 200px;
+}
+textarea {
+    height: 180px;
+    padding-top: 5px;
+    resize: none;
+}
+textarea::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    border-radius: 5px;
+}
+textarea::-webkit-scrollbar-thumb {
+    background-color: var(--stroke);
+    border-radius: 5px;
+}
+form input:hover, textarea:hover {
+    border-width: 3px;
+}
+form input:focus, textarea:focus {
+    background-color: var(--stroke);
+}
+textarea:focus::-webkit-scrollbar-thumb {
+    background-color: var(--input);
+}
+form button {
+    background-color: var(--text);
+    color: var(--input);
+    height: 45px;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: var(--label-size);
+}
+form button:hover {
+    background-color: transparent;
+    border: 3px solid var(--text);
+    color: var(--text);
+}
+form button:focus {
+    background-color: transparent;
+    border: 3px solid var(--text);
+    color: var(--text);
+}
