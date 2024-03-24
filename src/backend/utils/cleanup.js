@@ -6,11 +6,7 @@ async function activateEmailCleanupTask() {
     //Remove emails that are older than 5 minutes
     cron.schedule("0 0 * * *", async () => {
         console.log("Cleaning up emails...");
-        await database.remove("confirmation", {
-            createdAt: {
-                $lt: new Date(Date.now() - (5 * 60 * 1000))
-            }
-        });
+        await database.removeExpiredEmails();
         console.log("Emails cleaned up!");
     });
 }

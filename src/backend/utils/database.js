@@ -101,10 +101,18 @@ async function removeConfirmation(email) {
 async function increaseTries(email) {
     await update(confirmationName, { email: email }, { $inc: { tries: 1 } });
 }
+async function removeExpiredEmails() {
+    await remove(confirmationName, {
+        createdAt: {
+            $lt: new Date(Date.now() - (5 * 60 * 1000))
+        }
+    });
+}
 module.exports = {
     connect,
     storeConfirmation,
     getConfirmation,
     removeConfirmation,
-    increaseTries
+    increaseTries,
+    removeExpiredEmails
 }
