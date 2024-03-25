@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const path = require("path");
 const helmet = require("helmet");
-const limit = require("express-limit");
+const limit = require("express-limit").limit;
 const bodyParser = require("body-parser");
 const crypto = require("crypto");
 const EmailSender = require("./email/EmailSender");
@@ -20,6 +20,14 @@ app.use(limit({ //Max 100 requests per minute
     duration: 60 * 1000,
     max: 100
 }));
+app.use((error, req, res, next) => {
+    if (error instanceof Error && error.message === "Too many requests")
+        return res.status(429).json({ message: "Too many requests, please try again later." });
+    console.error(error);
+    res.status(500).send({
+        message: "Internal server error"
+    });
+});
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/bundles/", "contact.html"));
