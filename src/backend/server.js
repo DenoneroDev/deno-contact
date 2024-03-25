@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const path = require("path");
+const helmet = require("helmet");
+const limit = require("express-limit");
 const bodyParser = require("body-parser");
 const crypto = require("crypto");
 const EmailSender = require("./email/EmailSender");
@@ -9,10 +11,15 @@ const Validator = require("./utils/Validator");
 const database = require("./utils/database");
 const cleanup = require("./utils/cleanup");
 
+app.use(helmet());
 app.use(express.static("./src/frontend/bundles/"));
 app.use("/images", express.static("./src/frontend/images/"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(limit({ //Max 100 requests per minute
+    duration: 60 * 1000,
+    max: 100
+}));
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/bundles/", "contact.html"));
@@ -37,11 +44,13 @@ app.post("/confirmation", async(req, res) => {
                 message: "Could not store confirmation data, please try again",
             });
         
-        //Send email with confirmaition code
+        //Send email with confirmation code
         const emailSender = new EmailSender();
         emailSender.sendConfirmationEmail(email, firstName, code);
     
-        res.status(200).send(req.body);
+        res.status(200).send({
+            message: "Email sent successfully",
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send({

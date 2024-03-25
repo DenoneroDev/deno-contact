@@ -32,9 +32,11 @@ export default class Form {
         formButtonLoading.start();
         try {
             const data = this.#extractFormData();
-            const confirmationData = await this.confirmation.send(data);
-            this.#handleConfirmationSuccess(confirmationData);
-            // this.#handleConfirmationSuccess({});
+            await this.confirmation.send({
+                firstName: data.firstName,
+                email: data.email
+            });
+            this.#handleConfirmationSuccess();
         } catch(error) {
             console.error(error);
             this.#handleConfirmationError(error.responseJSON);
@@ -49,10 +51,10 @@ export default class Form {
             lastName: this.$form.find("#last-name").val(),
             companyName: this.$form.find("#company-name").val(),
             subject: this.$form.find("#subject").val(),
-            text: this.$form.find("#text").val()
+            text: this.$form.find("#text").val(),
         };
     }
-    #handleConfirmationSuccess(data) {
+    #handleConfirmationSuccess() {
         const confirmationModal = new Modal({
             title: "Confirmation",
             content: this.codeInput.element(),
@@ -63,11 +65,11 @@ export default class Form {
                 const modalButtonLoading = new ButtonLoading(confirmationModal.$btn);
                 modalButtonLoading.start();
                 try {
-                    const response = await this.submission.send({
-                        ...data,
+                    await this.submission.send({
+                        ...this.#extractFormData(),
                         code: this.codeInput.getCode()
                     });
-                    this.#handleFormSubmissionSuccess(response);
+                    this.#handleFormSubmissionSuccess();
                 } catch(error) {
                     console.error(error);
                     this.#handleFormSubmissionError(error?.responseJSON);
